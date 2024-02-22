@@ -5,13 +5,12 @@ ErrorStatus_t LED_init(void)
 {
 	ErrorStatus_t RetErrorStatus =NOK;
 	GPIO_cfg_t Pin;
-		Pin.Mode=MODE_OUTPUT;
-		Pin.OutPut_Mode=OPT_PP;
-		Pin.OutPut_Speed=HIGH_SPEED;
+		Pin.GPIO_Mode=GPIO_MODE_OUTPUT_PP;
+		Pin.GPIO_OutPut_Speed=GPIO_HIGH_SPEED;
 		for (u8 itr=0;itr<_LEDS_NUM;itr++)
 		{
-			Pin.Port_Num=LEDS[itr].LED_Port;
-			Pin.Pin_Num=LEDS[itr].LED_Pin;
+			Pin.GPIO_Port_Num=LEDS[itr].LED_Port;
+			Pin.GPIO_Pin_Num=LEDS[itr].LED_Pin;
 			GPIO_initPin(&Pin);
 		}
 		return RetErrorStatus;

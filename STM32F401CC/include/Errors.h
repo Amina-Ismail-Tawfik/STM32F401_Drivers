@@ -7,7 +7,7 @@ typedef enum{
     ParameterError,
     ConfigurationError,
 	Clock_SourceError,
-    NULL_Pointer
+    NULL_PointerError
 }ErrorStatus_t;
 
 #endif

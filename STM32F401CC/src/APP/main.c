@@ -51,41 +51,27 @@
 #pragma GCC diagnostic ignored "-Wmissing-declarations"
 #pragma GCC diagnostic ignored "-Wreturn-type"
 
-//#include "GPIO.h"
+#include "GPIO.h"
 #include "RCC.h"
+
 int
 main(int argc, char* argv[])
 {
-	//RCC_ControlClock(CLK_HSE_OSC,RCC_STAT_ON);
-	//RCC_SelectSystemClock(SYS_CLK_HSE);
-	//RCC_SelectSystemClock(SYS_CLK_HSI);
-	//RCC_ControlClock(CLK_HSE_OSC,RCC_STAT_OFF);
-	//RCC_SelectSystemClock(SYS_CLK_HSE);
-	//RCC_ConfigurePLL(CLK_HSI,P_6,8,192);
-	/*RCC_EnablePeripheral(AHB2,AHB2EN_OTGFS);
-	RCC_DisablePeripheral(AHB2,AHB2EN_OTGFS);
-	RCC_EnablePeripheral(AHB2,AHB1EN_DMA1);
-	RCC_DisablePeripheral(AHB1,AHB2EN_OTGFS);
-	*/
-	RCC_SetAHB1Prescaler(HPRE_NDIV);
-	RCC_SetAPB1Prescaler(PPRE1_2);
-	RCC_SetAPB2Prescaler(PPRE2_4);
-	RCC_SetAPB1Prescaler(PPRE2_8);
-	/*
-	RCC_EnablePeripheral (AHB1,EN_GPIOA);
-    GPIO_cfg_t LED;
-    LED.Port_Num=GPIOA;
-    LED.Pin_Num=pin0;
-    LED.Mode=MODE_OUTPUT;
-    LED.OutPut_Mode=OPT_PP;
-    LED.OutPut_Speed=MEDIUM_SPEED;
-    GPIO_initPin(&LED);
-  GPIO_setPinValue(GPIOA,pin0,PIN_STAT_ON);
-  uint32 x=0;
-  GPIO_getPinValue(GPIOA,pin0,&x);
-  while (x<10)
-	  x++;
-	  */
+	RCC_EnablePeripheral(AHB1,AHB1EN_GPIOA);
+	GPIO_cfg_t GPIOA_pin0;
+	GPIOA_pin0.GPIO_Port_Num=GPIOA;
+	GPIOA_pin0.GPIO_Pin_Num=GPIO_pin0;
+	GPIOA_pin0.GPIO_Mode=GPIO_MODE_OUTPUT_OD;
+	GPIOA_pin0.GPIO_OutPut_Speed=GPIO_HIGH_SPEED;
+	GPIOA_pin0.GPIO_Pull=GPIO_PULLDOWN;
+	GPIOA_pin0.GPIO_AF=GPIO_AF_SYSTEM;
+	GPIO_initPin(&GPIOA_pin0);
+	GPIO_cfg_t GPIOB_pin0;
+		GPIOB_pin0.GPIO_Port_Num=25;
+		GPIOB_pin0.GPIO_Pin_Num=GPIO_pin0;
+		GPIOB_pin0.GPIO_Mode=GPIO_MODE_OUTPUT_OD;
+		GPIOB_pin0.GPIO_OutPut_Speed=GPIO_HIGH_SPEED;
+		GPIO_initPin(&GPIOB_pin0);
 	while (1)
 	{
 
