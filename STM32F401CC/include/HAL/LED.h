@@ -5,32 +5,44 @@
 #include "Errors.h"
 #include "LED_cfg.h"
 
+/* LED active state */
 #define LED_ACTIVE_HIGH 0
 #define LED_ACTIVE_LOW 1
+
+/* LED initial state */
 #define LED_STAT_ON 1
 #define LED_STAT_OFF 0
 
-typedef struct{
-	void* LED_Port;
-	u8 LED_Pin;
-	u8 LED_ActiveState;
-	u8 LED_InitState;
-}LED_cfg_t;
+/**
+ * @brief LED configuration structure
+ *
+ * This structure holds the configuration parameters for each LED.
+ */
+typedef struct {
+    void* LED_Port;         /**< Pointer to the GPIO port of the LED */
+    u8 LED_Pin;             /**< Pin number of the LED */
+    u8 LED_ActiveState;     /**< Active state of the LED (HIGH or LOW) */
+    u8 LED_InitState;       /**< Initial state of the LED (ON or OFF) */
+} LED_cfg_t;
 
+/**
+ * @brief Initializes LEDs
+ *
+ * This function initializes all LEDs based on their configurations.
+ *
+ * @return ErrorStatus_t Returns OK if the initialization is successful, otherwise returns an error status.
+ */
 ErrorStatus_t LED_init(void);
 
-ErrorStatus_t LED_SetStatus(uint32 LED,u8 LEDstatus);
+/**
+ * @brief Sets status of an LED
+ *
+ * This function sets the status of a specific LED.
+ *
+ * @param LED: LED index
+ * @param LED_STAT: LED status (ON or OFF)
+ * @return ErrorStatus_t Returns OK if the initialization is successful, otherwise returns an error status.
+ */
+ErrorStatus_t LED_SetStatus(uint16 LED, u8 LED_STAT);
 
-
-
-
-
-
-
-
-
-
-
-
-
-#endif
+#endif /* LED_H */
