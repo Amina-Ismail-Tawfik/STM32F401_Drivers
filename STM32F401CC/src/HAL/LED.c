@@ -35,8 +35,19 @@ ErrorStatus_t LED_SetStatus(uint16 LED, u8 LED_STAT)
 {
     ErrorStatus_t RetErrorStatus = NOK;
 
-    RetErrorStatus = GPIO_setPinValue(LEDS[LED].LED_Port, LEDS[LED].LED_Pin, LEDS[LED].LED_ActiveState ^ LED_STAT);
+    if(LED > _LEDS_NUM)
+    {
+    	RetErrorStatus = ParameterError;
+    }
+    else if(LED_STAT>1)
+    {
+    	RetErrorStatus = ParameterError;
+    }
+    else
+    {
+    	RetErrorStatus = GPIO_setPinValue(LEDS[LED].LED_Port, LEDS[LED].LED_Pin, LEDS[LED].LED_ActiveState ^ LED_STAT);
 
+    }
     return RetErrorStatus;
 }
 

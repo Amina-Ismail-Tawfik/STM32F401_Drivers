@@ -123,6 +123,6 @@ ErrorStatus_t GPIO_setPinValue(void* GPIOx, u8 GPIO_pin, u8 GPIO_STATE);
  * @param Pin_Stat Pointer to store the GPIO pin value.
  * @return ErrorStatus_t Returns OK if the operation is successful, otherwise returns an error status.
  */
-ErrorStatus_t GPIO_getPinValue(void* GPIOx, u8 GPIO_pin, uint32* Pin_Stat);
+ErrorStatus_t GPIO_getPinValue(void* GPIOx, u8 GPIO_pin, u8* Pin_Stat);
 
 #endif

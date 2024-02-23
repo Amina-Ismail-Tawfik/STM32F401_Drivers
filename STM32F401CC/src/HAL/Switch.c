@@ -3,6 +3,7 @@
 extern const Switch_cfg_t switcheS [_SWITCH_NUM];
 ErrorStatus_t Switch_init(void)
 {
+	ErrorStatus_t RetErrorStatus = NOK;
 	GPIO_cfg_t Pin;
 		Pin.GPIO_Mode=GPIO_MODE_INPUT;
 		Pin.GPIO_OutPut_Speed=GPIO_LOW_SPEED;
@@ -13,8 +14,9 @@ ErrorStatus_t Switch_init(void)
 			Pin.GPIO_Port_Num=switcheS[itr].switch_Port;
 			Pin.GPIO_Pin_Num=switcheS[itr].switch_Pin;
 			Pin.GPIO_Pull=switcheS[itr].switch_Connection;
-			GPIO_initPin(&Pin);
+			RetErrorStatus=GPIO_initPin(&Pin);
 		}
+		return RetErrorStatus;
 }
 
 ErrorStatus_t Switch_getKey(uint16 Switch, u8* Switch_State)

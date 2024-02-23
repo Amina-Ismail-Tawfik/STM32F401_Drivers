@@ -163,7 +163,7 @@ ErrorStatus_t GPIO_setPinValue(void* GPIOx,u8 GPIO_pin,u8 GPIO_STATE)
 
 }
 
-ErrorStatus_t GPIO_getPinValue(void* GPIOx,u8 GPIO_pin,uint32* Pin_Stat)
+ErrorStatus_t GPIO_getPinValue(void* GPIOx,u8 GPIO_pin,u8* Pin_Stat)
 {
 	ErrorStatus_t RetErrorStatus = NOK;
 	if (Pin_Stat==0)

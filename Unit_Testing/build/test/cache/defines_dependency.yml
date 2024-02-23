@@ -1,0 +1,9 @@
+---
+build/test/mocks/mock_GPIO.c:
+- TEST
+src/LED_Test.c:
+- TEST
+"../STM32F401CC/src/HAL/LED.c":
+- TEST
+"../STM32F401CC/src/HAL/LED_cfg.c":
+- TEST
