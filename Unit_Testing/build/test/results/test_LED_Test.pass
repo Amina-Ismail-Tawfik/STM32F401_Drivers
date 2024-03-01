@@ -3,12 +3,12 @@
   :path: test
   :file: test_LED_Test.c
 :successes:
-- :test: test_LEDSetStatus_1
-  :line: 23
+- :test: test_PARAM_LEDSetStatus_1
+  :line: 32
   :message: ''
   :unity_test_time: 0
-- :test: test_LEDSetStatus_2
-  :line: 31
+- :test: test_PARAM_LEDSetStatus_2
+  :line: 40
   :message: ''
   :unity_test_time: 0
 :failures: []
@@ -19,4 +19,4 @@
   :failed: 0
   :ignored: 0
 :stdout: []
-:time: 2.7526775000005728
+:time: 2.5926158000002033

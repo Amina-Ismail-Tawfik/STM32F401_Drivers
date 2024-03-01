@@ -23,7 +23,7 @@
 #define BSRR_OFFSET             0x00000010
 
 /************* GPIO Port Validation Macro ***************/
-#define GPIO_VALIDATE_PORT(PTR)    (PTR == GPIOA || PTR == GPIOB || PTR == GPIOC || PTR == GPIOC || PTR == GPIOD || PTR == GPIOE || PTR == GPIOH)
+#define GPIO_VALIDATE_PORT(PTR)    (PTR == GPIOA || PTR == GPIOB || PTR == GPIOC || PTR == GPIOD || PTR == GPIOE || PTR == GPIOH)
 
 typedef struct
 {

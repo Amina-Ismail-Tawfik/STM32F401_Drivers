@@ -12,8 +12,8 @@ char* GlobalOrderError;
 /*=======External Functions This Runner Calls=====*/
 extern void setUp(void);
 extern void tearDown(void);
-extern void test_LEDSetStatus_1(void);
-extern void test_LEDSetStatus_2(void);
+extern void test_PARAM_LEDSetStatus_1(void);
+extern void test_PARAM_LEDSetStatus_2(void);
 
 
 /*=======Mock Management=====*/
@@ -81,8 +81,8 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 int main(void)
 {
   UnityBegin("test_LED_Test.c");
-  run_test(test_LEDSetStatus_1, "test_LEDSetStatus_1", 23);
-  run_test(test_LEDSetStatus_2, "test_LEDSetStatus_2", 31);
+  run_test(test_PARAM_LEDSetStatus_1, "test_PARAM_LEDSetStatus_1", 32);
+  run_test(test_PARAM_LEDSetStatus_2, "test_PARAM_LEDSetStatus_2", 40);
 
   CMock_Guts_MemFreeFinal();
   return UnityEnd();

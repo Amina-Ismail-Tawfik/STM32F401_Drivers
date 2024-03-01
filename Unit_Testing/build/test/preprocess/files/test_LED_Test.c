@@ -12,7 +12,25 @@
 
 
 
-int8_t LED_THREE=3;
+typedef enum{
+
+    utest_OK,
+
+    utest_NOK,
+
+    utest_ParameterError,
+
+    utest_ConfigurationError,
+
+ utest_Clock_SourceError,
+
+    utest_NULL_PointerError
+
+}utest_ErrorStatus_t;
+
+
+
+
 
 void setUp(void)
 
@@ -38,19 +56,19 @@ void tearDown(void)
 
 
 
-void test_LEDSetStatus_1(void)
+void test_PARAM_LEDSetStatus_1(void)
 
 {
 
-    GPIO_setPinValue_CMockIgnoreAndReturn(25, 0);
+    GPIO_setPinValue_CMockIgnoreAndReturn(34, 0);
 
-    uint8_t result = LED_SetStatus(LED_THREE,1);
+    uint8_t result = LED_SetStatus(LED_ONE,1);
 
-    UnityAssertEqualNumber((UNITY_INT)(UNITY_INT8 )((2)), (UNITY_INT)(UNITY_INT8 )((result)), (
+    UnityAssertEqualNumber((UNITY_INT)(UNITY_INT8 )((0)), (UNITY_INT)(UNITY_INT8 )((result)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(27), UNITY_DISPLAY_STYLE_INT8);
+   ), (UNITY_UINT)(36), UNITY_DISPLAY_STYLE_INT8);
 
 }
 
@@ -58,18 +76,18 @@ void test_LEDSetStatus_1(void)
 
 
 
-void test_LEDSetStatus_2(void)
+void test_PARAM_LEDSetStatus_2(void)
 
 {
 
-    GPIO_setPinValue_CMockIgnoreAndReturn(33, 0);
+    GPIO_setPinValue_CMockIgnoreAndReturn(42, 0);
 
-    uint8_t result = LED_SetStatus(LED_ONE,LED_THREE);
+    uint8_t result = LED_SetStatus(LED_ONE,3);
 
     UnityAssertEqualNumber((UNITY_INT)(UNITY_INT8 )((2)), (UNITY_INT)(UNITY_INT8 )((result)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(35), UNITY_DISPLAY_STYLE_INT8);
+   ), (UNITY_UINT)(44), UNITY_DISPLAY_STYLE_INT8);
 
 }
