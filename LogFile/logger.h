@@ -1,5 +1,5 @@
-#ifndef LOGGERC_H
-#define LOGGERC_H
+#ifndef LOGGER_H
+#define LOGGER_H
 
 #include <stdarg.h>
 #include <stdio.h>
