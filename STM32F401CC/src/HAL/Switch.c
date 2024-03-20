@@ -1,6 +1,7 @@
 #include "Switch.h"
 #include "GPIO.h"
 extern const Switch_cfg_t switcheS [_SWITCH_NUM];
+uint8_t state[_SWITCH_NUM];
 ErrorStatus_t Switch_init(void)
 {
 	ErrorStatus_t RetErrorStatus = NOK;
@@ -28,13 +29,13 @@ ErrorStatus_t Switch_getKey(uint16 Switch, u8* Switch_State)
 		}
 	else
 	{
-		RetErrorStatus=GPIO_getPinValue(switcheS[Switch].switch_Port,switcheS[Switch].switch_Pin,Switch_State);
 		switch(switcheS[Switch].switch_Connection)
 		{
 		case SWITCH_PULL_DOWN:
+			*Switch_State=state[Switch];
 			break;
 		case SWITCH_PULL_UP:
-			*Switch_State= !Switch_State;
+			*Switch_State= !state[Switch];
 			break;
 		default:
 			break;
@@ -45,3 +46,36 @@ ErrorStatus_t Switch_getKey(uint16 Switch, u8* Switch_State)
 
 	return RetErrorStatus;
 }
+void sw_runnable()
+{
+	static uint32_t curr=0;
+	static uint32_t prev=0;
+	static uint32_t counter[_SWITCH_NUM];
+
+	uint32_t idx;
+	for (idx=0;idx<_SWITCH_NUM;idx++)
+	{
+		GPIO_getPinValue(switcheS[idx].switch_Port,switcheS[idx].switch_Pin,&curr);
+		if(curr==prev)
+		{
+			counter[idx]++;
+		}
+		else
+			counter[idx]=0;
+		if (counter[idx]==5)
+		{
+			state[idx]=curr;
+			counter[idx]=0;
+		}
+	}
+
+
+}
+
+
+
+
+
+
+
+

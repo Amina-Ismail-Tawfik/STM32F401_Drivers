@@ -31,6 +31,8 @@
 #include <stdlib.h>
 #include "diag/Trace.h"
 
+
+
 // ----------------------------------------------------------------------------
 //
 // Standalone STM32F4 empty sample (trace via DEBUG).
@@ -51,27 +53,34 @@
 #pragma GCC diagnostic ignored "-Wmissing-declarations"
 #pragma GCC diagnostic ignored "-Wreturn-type"
 
-#include "GPIO.h"
+#include "TrafficLights.h"
 #include "RCC.h"
-
+void toggle ()
+{
+	static uint8_t flag=0;
+	if (flag==0)
+	{
+		LED_SetStatus(LED_Green,LED_STAT_ON);
+		flag++;
+	}
+	else
+	{
+		LED_SetStatus(LED_Green,LED_STAT_OFF);
+		flag=0;
+	}
+}
 int
 main(int argc, char* argv[])
 {
 	RCC_EnablePeripheral(AHB1,AHB1EN_GPIOA);
-	GPIO_cfg_t GPIOA_pin0;
-	GPIOA_pin0.GPIO_Port_Num=GPIOA;
-	GPIOA_pin0.GPIO_Pin_Num=GPIO_pin0;
-	GPIOA_pin0.GPIO_Mode=GPIO_MODE_OUTPUT_OD;
-	GPIOA_pin0.GPIO_OutPut_Speed=GPIO_HIGH_SPEED;
-	GPIOA_pin0.GPIO_Pull=GPIO_PULLDOWN;
-	GPIOA_pin0.GPIO_AF=GPIO_AF_SYSTEM;
-	GPIO_initPin(&GPIOA_pin0);
-	GPIO_cfg_t GPIOB_pin0;
-		GPIOB_pin0.GPIO_Port_Num=25;
-		GPIOB_pin0.GPIO_Pin_Num=GPIO_pin0;
-		GPIOB_pin0.GPIO_Mode=GPIO_MODE_OUTPUT_OD;
-		GPIOB_pin0.GPIO_OutPut_Speed=GPIO_HIGH_SPEED;
-		GPIO_initPin(&GPIOB_pin0);
+	//sched_init();
+	LED_init();
+	//sched_RegisterRunnable(&Traffic_Lights);
+	//sched_start();
+	systick_SetTimerMs(1000);
+	systick_setCallBack(toggle);
+	systick_Start(PERIODIC);
+
 	while (1)
 	{
 

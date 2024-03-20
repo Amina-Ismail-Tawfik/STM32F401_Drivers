@@ -1,7 +1,7 @@
 #ifndef SWITCH_H
 #define SWITCH_H
 
-#include "STD_TYPES.h"
+#include "stdint.h"
 #include "Errors.h"
 #include "Switch_cfg.h"
 
@@ -16,8 +16,8 @@
  */
 typedef struct {
     void* switch_Port;          /**< Pointer to the GPIO port of the switch */
-    u8 switch_Pin;              /**< Pin number of the switch */
-    u8 switch_Connection;       /**< Connection type of the switch (PULL_DOWN or PULL_UP) */
+    uint8_t switch_Pin;              /**< Pin number of the switch */
+    uint8_t switch_Connection;       /**< Connection type of the switch (PULL_DOWN or PULL_UP) */
 } Switch_cfg_t;
 
 /**
@@ -38,7 +38,7 @@ ErrorStatus_t Switch_init(void);
  * @param Switch_State: Pointer to where the switch state will be stored
  * @return ErrorStatus_t: OK if retrieval is successful, error status otherwise
  */
-ErrorStatus_t Switch_getKey(uint16 Switch, u8* Switch_State);
+ErrorStatus_t Switch_getKey(uint16_t Switch, uint8_t* Switch_State);
 
 #endif /* SWITCH_H */
 

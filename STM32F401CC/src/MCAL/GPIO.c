@@ -152,7 +152,7 @@ ErrorStatus_t GPIO_setPinValue(void* GPIOx,u8 GPIO_pin,u8 GPIO_STATE)
 		RetErrorStatus=OK;
 		if (GPIO_STATE==GPIO_STATE_LOW)
 		{
-			((GPIO_t*)GPIOx)->BSRR &= ~( (1<<(GPIO_pin+BSRR_OFFSET)));
+			((GPIO_t*)GPIOx)->BSRR |=  (1<<(GPIO_pin+BSRR_OFFSET));
 		}
 		else if (GPIO_STATE==GPIO_STATE_HIGH)
 		{
