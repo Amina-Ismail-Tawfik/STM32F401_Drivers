@@ -52,9 +52,14 @@
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 #pragma GCC diagnostic ignored "-Wmissing-declarations"
 #pragma GCC diagnostic ignored "-Wreturn-type"
+#pragma GCC optimize ("O0")
 
 #include "TrafficLights.h"
+#include "sched.h"
 #include "RCC.h"
+#include "LCD.h"
+
+
 void toggle ()
 {
 	static uint8_t flag=0;
@@ -72,14 +77,17 @@ void toggle ()
 int
 main(int argc, char* argv[])
 {
-	RCC_EnablePeripheral(AHB1,AHB1EN_GPIOA);
+	RCC_EnablePeripheral(AHB1,AHB1EN_GPIOB);
+	sched_init();
+	sched_RegisterRunnable(&LCD);
+	sched_RegisterRunnable(&LCD_APP);
+	sched_start();
+
 	//sched_init();
-	LED_init();
+
 	//sched_RegisterRunnable(&Traffic_Lights);
 	//sched_start();
-	systick_SetTimerMs(1000);
-	systick_setCallBack(toggle);
-	systick_Start(PERIODIC);
+
 
 	while (1)
 	{

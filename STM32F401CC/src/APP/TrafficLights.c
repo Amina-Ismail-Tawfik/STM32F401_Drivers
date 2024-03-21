@@ -3,13 +3,19 @@
 #define Y	1
 #define R	2
 #define periodicity_sec 2
-
-runnable_t Traffic_Lights={
-		.name="runnable1",
+#include <LCD.h>
+runnable_t LCD_APP={
+		.name="LCD",
 		.priority=0,
-		.periodicity=2,
-		.CB=traffic_lights
+		.periodicity=10,
+		.CB=myLCD_APP
 };
+void myLCD_APP()
+{
+	LCD_initAsyn();
+	LCD_writeStringAsyn("Suhila Ashraf",50);
+}
+/*
 void traffic_lights ()
 {
 	static uint32_t state=G;
@@ -60,6 +66,6 @@ void traffic_lights ()
 	TimeSec += periodicity_sec;
 }
 
-
+*/
 
 

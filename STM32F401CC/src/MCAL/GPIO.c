@@ -6,8 +6,7 @@
  */
 
 #include "GPIO.h"
-#include "STD_TYPES.h"
-#include "Errors.h"
+
 
 /************* GPIO Bit Masks to Configure 2 Bits ***************/
 #define GPIO_TWO_BIT_MASK       0x00000003
@@ -27,23 +26,23 @@
 
 typedef struct
 {
-    uint32 MODER;    /**< GPIO port mode register */
-    uint32 OTYPER;   /**< GPIO port output type register */
-    uint32 OSPEEDR;  /**< GPIO port output speed register */
-    uint32 PUPDR;    /**< GPIO port pull-up/pull-down register */
-    uint32 IDR;      /**< GPIO port input data register */
-    uint32 ODR;      /**< GPIO port output data register */
-    uint32 BSRR;     /**< GPIO port bit set/reset register */
-    uint32 LCKR;     /**< GPIO port configuration lock register */
-    uint32 AFRL;     /**< GPIO alternate function low register */
-    uint32 AFRH;     /**< GPIO alternate function high register */
+    uint32_t MODER;    /**< GPIO port mode register */
+    uint32_t OTYPER;   /**< GPIO port output type register */
+    uint32_t OSPEEDR;  /**< GPIO port output speed register */
+    uint32_t PUPDR;    /**< GPIO port pull-up/pull-down register */
+    uint32_t IDR;      /**< GPIO port input data register */
+    uint32_t ODR;      /**< GPIO port output data register */
+    uint32_t BSRR;     /**< GPIO port bit set/reset register */
+    uint32_t LCKR;     /**< GPIO port configuration lock register */
+    uint32_t AFRL;     /**< GPIO alternate function low register */
+    uint32_t AFRH;     /**< GPIO alternate function high register */
 } GPIO_t;
 
 ErrorStatus_t GPIO_initPin (GPIO_cfg_t* add_pin)
 {
 	ErrorStatus_t RetErrorStatus=NOK;
 	/*Pointer to read Mode*/
-	u8* ModeCheck_ptr=0;
+	uint8_t* ModeCheck_ptr=0;
 
 	/*Validate Pointers*/
 	if(add_pin==0 || add_pin->GPIO_Port_Num==0)
@@ -54,7 +53,7 @@ ErrorStatus_t GPIO_initPin (GPIO_cfg_t* add_pin)
 	{
 		/*ModeCheck_ptr holds Mode (output or input)*/
 		/*ModeCheck_ptr++ holds Output_Mode (PP or OD)*/
-			ModeCheck_ptr=(u8*)&add_pin->GPIO_Mode;
+			ModeCheck_ptr=(uint8_t*)&add_pin->GPIO_Mode;
 	}
 
 	/*Validate struct fields GPIO_Port,GPIO_Pin,GPIO_Mode,GPIO_Output_Speed,GPIO_Pull,GPIO_AF*/
@@ -93,13 +92,13 @@ ErrorStatus_t GPIO_initPin (GPIO_cfg_t* add_pin)
 		ModeCheck_ptr--;
 		/***************** Configure Mode as Output or Input *****************/
 		((GPIO_t*)(add_pin->GPIO_Port_Num))->MODER &=~ (GPIO_TWO_BIT_MASK<<GPIO_PIN_OFFSET_2*add_pin->GPIO_Pin_Num);
-		((GPIO_t*)(add_pin->GPIO_Port_Num))->MODER |= (uint32)*ModeCheck_ptr<<(GPIO_PIN_OFFSET_2*add_pin->GPIO_Pin_Num);
+		((GPIO_t*)(add_pin->GPIO_Port_Num))->MODER |= (uint32_t)*ModeCheck_ptr<<(GPIO_PIN_OFFSET_2*add_pin->GPIO_Pin_Num);
 
 		ModeCheck_ptr++;
 
 		/***************** Configure Output Type as Push Pull or Open Drain *****************/
 		//((GPIO_t*)(add_pin->GPIO_Port_Num))->OTYPER &=~ (1<<add_pin->GPIO_Pin_Num);
-		((GPIO_t*)(add_pin->GPIO_Port_Num))->OTYPER |= (uint32)*ModeCheck_ptr<<add_pin->GPIO_Pin_Num;
+		((GPIO_t*)(add_pin->GPIO_Port_Num))->OTYPER |= (uint32_t)*ModeCheck_ptr<<add_pin->GPIO_Pin_Num;
 
 		/***************** Configure Output Speed *****************/
 		((GPIO_t*)(add_pin->GPIO_Port_Num))->OSPEEDR &= ~(GPIO_TWO_BIT_MASK<<GPIO_PIN_OFFSET_2*add_pin->GPIO_Pin_Num);
@@ -127,7 +126,7 @@ ErrorStatus_t GPIO_initPin (GPIO_cfg_t* add_pin)
 	return RetErrorStatus;
 }
 
-ErrorStatus_t GPIO_setPinValue(void* GPIOx,u8 GPIO_pin,u8 GPIO_STATE)
+ErrorStatus_t GPIO_setPinValue(void* GPIOx,uint8_t GPIO_pin,uint8_t GPIO_STATE)
 {
 	ErrorStatus_t RetErrorStatus = NOK;
 	/***************** Validate Parameters  *****************/
@@ -163,7 +162,7 @@ ErrorStatus_t GPIO_setPinValue(void* GPIOx,u8 GPIO_pin,u8 GPIO_STATE)
 
 }
 
-ErrorStatus_t GPIO_getPinValue(void* GPIOx,u8 GPIO_pin,u8* Pin_Stat)
+ErrorStatus_t GPIO_getPinValue(void* GPIOx,uint8_t GPIO_pin,uint8_t* Pin_Stat)
 {
 	ErrorStatus_t RetErrorStatus = NOK;
 	if (Pin_Stat==0)

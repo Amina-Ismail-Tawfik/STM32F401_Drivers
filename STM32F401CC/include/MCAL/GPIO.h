@@ -1,7 +1,7 @@
 #ifndef GPIO_H
 #define GPIO_H
 
-#include "STD_TYPES.h"
+#include "stdint.h"
 #include "Errors.h"
 
 /**************** GPIO Base Addresses ****************/
@@ -61,11 +61,11 @@
 typedef struct
 {
     void* GPIO_Port_Num;
-    u8 GPIO_Pin_Num;
-    uint16 GPIO_Mode;
-    u8 GPIO_OutPut_Speed;
-    u8 GPIO_Pull;
-    u8 GPIO_AF;
+    uint8_t GPIO_Pin_Num;
+    uint16_t GPIO_Mode;
+    uint8_t GPIO_OutPut_Speed;
+    uint8_t GPIO_Pull;
+    uint8_t GPIO_AF;
 } GPIO_cfg_t;
 
 /**************** GPIO Pin Enumeration ****************/
@@ -111,7 +111,7 @@ ErrorStatus_t GPIO_initPin (GPIO_cfg_t* add_pin);
  * @param GPIO_STATE GPIO state to set (HIGH or LOW).
  * @return ErrorStatus_t Returns OK if the operation is successful, otherwise returns an error status.
  */
-ErrorStatus_t GPIO_setPinValue(void* GPIOx, u8 GPIO_pin, u8 GPIO_STATE);
+ErrorStatus_t GPIO_setPinValue(void* GPIOx, uint8_t GPIO_pin, uint8_t GPIO_STATE);
 
 /**
  * @brief Gets the value of a GPIO pin.
@@ -123,6 +123,6 @@ ErrorStatus_t GPIO_setPinValue(void* GPIOx, u8 GPIO_pin, u8 GPIO_STATE);
  * @param Pin_Stat Pointer to store the GPIO pin value.
  * @return ErrorStatus_t Returns OK if the operation is successful, otherwise returns an error status.
  */
-ErrorStatus_t GPIO_getPinValue(void* GPIOx, u8 GPIO_pin, u8* Pin_Stat);
+ErrorStatus_t GPIO_getPinValue(void* GPIOx, uint8_t GPIO_pin, uint8_t* Pin_Stat);
 
 #endif

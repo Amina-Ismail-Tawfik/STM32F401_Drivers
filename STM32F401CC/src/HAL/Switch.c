@@ -10,7 +10,7 @@ ErrorStatus_t Switch_init(void)
 		Pin.GPIO_OutPut_Speed=GPIO_LOW_SPEED;
 		Pin.GPIO_AF=GPIO_AF_SYSTEM;
 
-		for (u8 itr=0;itr<_SWITCH_NUM;itr++)
+		for (uint8_t itr=0;itr<_SWITCH_NUM;itr++)
 		{
 			Pin.GPIO_Port_Num=switcheS[itr].switch_Port;
 			Pin.GPIO_Pin_Num=switcheS[itr].switch_Pin;
@@ -20,7 +20,7 @@ ErrorStatus_t Switch_init(void)
 		return RetErrorStatus;
 }
 
-ErrorStatus_t Switch_getKey(uint16 Switch, u8* Switch_State)
+ErrorStatus_t Switch_getKey(uint16_t Switch, uint8_t* Switch_State)
 {
 	ErrorStatus_t RetErrorStatus=NOK;
 	if (Switch_State==0)
@@ -48,7 +48,7 @@ ErrorStatus_t Switch_getKey(uint16 Switch, u8* Switch_State)
 }
 void sw_runnable()
 {
-	static uint32_t curr=0;
+	static uint8_t curr=0;
 	static uint32_t prev=0;
 	static uint32_t counter[_SWITCH_NUM];
 
