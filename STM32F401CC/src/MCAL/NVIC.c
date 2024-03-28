@@ -32,21 +32,47 @@
 ErrorStatus_t NVIC_EnableIRQ(IRQ_t IRQn)
 {
 	ErrorStatus_t RetErrorStatus=NOK;
-	NVIC_ISER[IRQn/32] = 1<<(IRQn%32);
+	if (IRQn>IRQ_SPI4)
+	{
+		RetErrorStatus=ParameterError;
+	}
+	else
+	{
+		RetErrorStatus=OK;
+		NVIC_ISER[IRQn/32] = 1<<(IRQn%32);
+	}
+
 	return RetErrorStatus;
 }
 
 ErrorStatus_t NVIC_DisableIRQ(IRQ_t IRQn)
 {
 	ErrorStatus_t RetErrorStatus=NOK;
-	NVIC_ICER [IRQn/32] = 1<<(IRQn%32);
+	if (IRQn>IRQ_SPI4)
+	{
+		RetErrorStatus=ParameterError;
+	}
+	else
+	{
+		RetErrorStatus=OK;
+		NVIC_ICER [IRQn/32] = 1<<(IRQn%32);
+	}
 	return RetErrorStatus;
 }
 
 ErrorStatus_t NVIC_SetPendingIRQ(IRQ_t IRQn)
 {
 	ErrorStatus_t RetErrorStatus=NOK;
-	NVIC_ISPR[IRQn/32] |= 1<<(IRQn%32);
+	if (IRQn>IRQ_SPI4)
+		{
+			RetErrorStatus=ParameterError;
+		}
+		else
+		{
+			RetErrorStatus=OK;
+			NVIC_ISPR[IRQn/32] = 1<<(IRQn%32);
+		}
+
 	return RetErrorStatus;
 }
 

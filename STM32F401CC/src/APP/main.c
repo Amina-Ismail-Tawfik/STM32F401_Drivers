@@ -54,47 +54,27 @@
 #pragma GCC diagnostic ignored "-Wreturn-type"
 #pragma GCC optimize ("O0")
 
-#include "TrafficLights.h"
-#include "sched.h"
+#include "LCD_app.h"
 #include "RCC.h"
-#include "LCD.h"
+#include "sched.h"
 
 
-void toggle ()
-{
-	static uint8_t flag=0;
-	if (flag==0)
-	{
-		LED_SetStatus(LED_Green,LED_STAT_ON);
-		flag++;
-	}
-	else
-	{
-		LED_SetStatus(LED_Green,LED_STAT_OFF);
-		flag=0;
-	}
-}
-int
-main(int argc, char* argv[])
-{
-	RCC_EnablePeripheral(AHB1,AHB1EN_GPIOB);
-	sched_init();
-	sched_RegisterRunnable(&LCD);
-	sched_RegisterRunnable(&LCD_APP);
-	sched_start();
+ /* USER CODE END HardFault_IRQn 0 */
 
-	//sched_init();
+  int main()
+  {
+	  RCC_EnablePeripheral(AHB1,AHB1EN_GPIOB);
+	  sched_init();
+	  sched_RegisterRunnable(&LCD_Runnable);
+	  sched_RegisterRunnable(&LCD_RTask);
+	  sched_start();
 
-	//sched_RegisterRunnable(&Traffic_Lights);
-	//sched_start();
+	  while (1)
+	   {
 
-
-	while (1)
-	{
-
-	}
-	return 0;
-}
+	   }
+	  return 0;
+  }
 
 #pragma GCC diagnostic pop
 

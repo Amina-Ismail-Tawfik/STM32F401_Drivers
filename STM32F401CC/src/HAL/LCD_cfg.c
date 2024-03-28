@@ -1,5 +1,6 @@
 #include <LCD.h>
 #include <GPIO.h>
+
 const LCD_cfg_t LCD_pins [_LCD_ARR_SIZE]= {
 	 [_EN]={.LCD_Port=GPIOB,
 			.LCD_Pin=GPIO_pin0},

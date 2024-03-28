@@ -2,7 +2,7 @@
  * sched.c
  *
  *  Created on: Mar 14, 2024
- *      Author: adel
+ *      Author: Amina Ismail
  */
 #include <sched.h>
 

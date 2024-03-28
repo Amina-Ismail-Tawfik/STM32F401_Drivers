@@ -93,8 +93,6 @@
 #define HPRE_256        0X00000000000000E0
 #define HPRE_512        0x00000000000000F0
 
-/********************** APB1 Prescaler Options **********************/
-#define PPRE1_NDIV      0x000000
 
 /********************** APB1 Prescaler Options **********************/
 #define PPRE1_NDIV      0x0000000100000000
