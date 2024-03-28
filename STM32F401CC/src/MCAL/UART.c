@@ -17,6 +17,7 @@
 #define TE_MASK     0x00000008
 #define STOP_MASK   0x00003000
 
+#define BRR_MASK	4
 void UART_TxTask();
 void UART_RxTask();
 
@@ -72,6 +73,10 @@ ErrorStatus_t UART_TxBufferAsync(void* UARTx,uint8_t* buffer,uint16_t length,Txc
 		loc_register&=~STOP_MASK;
 		Tx_req.UARTx->CR2=loc_register;
 
+		loc_register=Tx_req.UARTx->BRR;
+		loc_register|=104<<4;
+		Tx_req.UARTx->BRR=loc_register;
+
 		loc_register=Tx_req.UARTx->CR1;
 		loc_register|=TE_MASK;
 		Tx_req.UARTx->CR1 = loc_register;
@@ -94,6 +99,9 @@ void UART_sendByte()
 		if (Tx_req.UARTx->SR&TXE_MASK)
 		{
 			uint32_t loc_register;
+			loc_register=Tx_req.UARTx->CR1;
+			loc_register|=TE_MASK;
+			Tx_req.UARTx->CR1 = loc_register;
 			loc_register=Tx_req.UARTx->DR;
 			loc_register|=Tx_req.buffer.data[Tx_req.buffer.pos];
 			Tx_req.UARTx->DR =loc_register;

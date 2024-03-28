@@ -33,6 +33,7 @@ int main()
 	UART_enableInterrupts(UART1);
 	UART_TxBufferAsync(UART1,myData,10,TxCB);
 
+	while(1);
 	/*sched_init();
 	sched_RegisterRunnable(&UART_TxRunnable);
 	sched_start();*/
